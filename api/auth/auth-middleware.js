@@ -1,5 +1,5 @@
 const { findBy } = require("../users/users-model");
-const Auth = require("./auth-model");
+const Auth = require("../users/users-model");
 
 const checkUsernameAvailable = async (req, res, next) => {
   if (!req.body.username || !req.body.password) {
