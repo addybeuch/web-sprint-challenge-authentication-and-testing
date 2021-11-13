@@ -3,9 +3,12 @@ const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const JWT_SECRET = process.env.JWT_SECRET || "secret";
 const jwt = require("jsonwebtoken");
-const { checkUsernameExists } = require("./auth-middleware");
+const {
+  checkUsernameExists,
+  checkUsernameAvailable,
+} = require("./auth-middleware");
 
-router.post("/register", (req, res, next) => {
+router.post("/register", checkUsernameAvailable, (req, res, next) => {
   if (req.body.username && req.body.password) {
     let user = req.body;
     const rounds = process.env.BCRYPT_ROUNDS || 8;
